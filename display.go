@@ -227,10 +227,10 @@ func outputDomains(list []godo.Domain, out io.Writer) {
 	w := new(tabwriter.Writer)
 	w.Init(out, 0, 8, 1, '\t', 0)
 
-	fmt.Fprintln(w, "Name")
+	fmt.Fprintln(w, "Name\tTTL")
 
 	for _, d := range list {
-		fmt.Fprintf(w, "%s\n", d.Name)
+		fmt.Fprintf(w, "%s\t%d\n", d.Name, d.TTL)
 	}
 
 	fmt.Fprintln(w)
