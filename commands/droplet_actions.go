@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"errors"
 	"io"
 	"strconv"
 
@@ -129,7 +130,14 @@ func DropletAction() *cobra.Command {
 func RunDropletActionGet(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		dropletID := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if dropletID == 0 {
+			return nil, errors.New("missing droplet id")
+		}
+
 		actionID := doit.DoitConfig.GetInt(ns, doit.ArgActionID)
+		if actionID == 0 {
+			return nil, errors.New("missing action id")
+		}
 
 		a, _, err := client.DropletActions.Get(dropletID, actionID)
 		return a, err
@@ -142,6 +150,9 @@ func RunDropletActionGet(ns string, out io.Writer) error {
 func RunDropletActionDisableBackups(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
 
 		a, _, err := client.DropletActions.DisableBackups(id)
 		return a, err
@@ -154,6 +165,9 @@ func RunDropletActionDisableBackups(ns string, out io.Writer) error {
 func RunDropletActionReboot(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
 
 		a, _, err := client.DropletActions.Reboot(id)
 		return a, err
@@ -166,6 +180,10 @@ func RunDropletActionReboot(ns string, out io.Writer) error {
 func RunDropletActionPowerCycle(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
+
 		a, _, err := client.DropletActions.PowerCycle(id)
 		return a, err
 	}
@@ -177,6 +195,9 @@ func RunDropletActionPowerCycle(ns string, out io.Writer) error {
 func RunDropletActionShutdown(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
 
 		a, _, err := client.DropletActions.Shutdown(id)
 		return a, err
@@ -189,6 +210,9 @@ func RunDropletActionShutdown(ns string, out io.Writer) error {
 func RunDropletActionPowerOff(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
 
 		a, _, err := client.DropletActions.PowerOff(id)
 		return a, err
@@ -201,6 +225,9 @@ func RunDropletActionPowerOff(ns string, out io.Writer) error {
 func RunDropletActionPowerOn(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
 
 		a, _, err := client.DropletActions.PowerOn(id)
 		return a, err
@@ -213,6 +240,9 @@ func RunDropletActionPowerOn(ns string, out io.Writer) error {
 func RunDropletActionPasswordReset(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
 
 		a, _, err := client.DropletActions.PasswordReset(id)
 		return a, err
@@ -225,6 +255,9 @@ func RunDropletActionPasswordReset(ns string, out io.Writer) error {
 func RunDropletActionEnableIPv6(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
 
 		a, _, err := client.DropletActions.EnableIPv6(id)
 		return a, err
@@ -237,6 +270,9 @@ func RunDropletActionEnableIPv6(ns string, out io.Writer) error {
 func RunDropletActionEnablePrivateNetworking(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
 
 		a, _, err := client.DropletActions.EnablePrivateNetworking(id)
 		return a, err
@@ -249,6 +285,9 @@ func RunDropletActionEnablePrivateNetworking(ns string, out io.Writer) error {
 func RunDropletActionUpgrade(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
 
 		a, _, err := client.DropletActions.Upgrade(id)
 		return a, err
@@ -261,7 +300,14 @@ func RunDropletActionUpgrade(ns string, out io.Writer) error {
 func RunDropletActionRestore(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
+
 		image := doit.DoitConfig.GetInt(ns, doit.ArgImageID)
+		if image == 0 {
+			return nil, errors.New("missing image id")
+		}
 
 		a, _, err := client.DropletActions.Restore(id, image)
 		return a, err
@@ -275,6 +321,10 @@ func RunDropletActionRestore(ns string, out io.Writer) error {
 func RunDropletActionResize(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
+
 		size := doit.DoitConfig.GetString(ns, doit.ArgImageSlug)
 		disk := doit.DoitConfig.GetBool(ns, doit.ArgResizeDisk)
 
@@ -289,6 +339,10 @@ func RunDropletActionResize(ns string, out io.Writer) error {
 func RunDropletActionRebuild(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
+
 		image := doit.DoitConfig.GetString(ns, doit.ArgImage)
 
 		var a *godo.Action
@@ -308,6 +362,10 @@ func RunDropletActionRebuild(ns string, out io.Writer) error {
 func RunDropletActionRename(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
+
 		name := doit.DoitConfig.GetString(ns, doit.ArgDropletName)
 
 		a, _, err := client.DropletActions.Rename(id, name)
@@ -321,7 +379,14 @@ func RunDropletActionRename(ns string, out io.Writer) error {
 func RunDropletActionChangeKernel(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
+
 		kernel := doit.DoitConfig.GetInt(ns, doit.ArgKernelID)
+		if kernel == 0 {
+			return nil, errors.New("missing kernel id")
+		}
 
 		a, _, err := client.DropletActions.ChangeKernel(id, kernel)
 		return a, err
@@ -334,6 +399,10 @@ func RunDropletActionChangeKernel(ns string, out io.Writer) error {
 func RunDropletActionSnapshot(ns string, out io.Writer) error {
 	fn := func(client *godo.Client) (*godo.Action, error) {
 		id := doit.DoitConfig.GetInt(ns, doit.ArgDropletID)
+		if id == 0 {
+			return nil, errors.New("missing droplet id")
+		}
+
 		name := doit.DoitConfig.GetString(ns, doit.ArgSnapshotName)
 
 		a, _, err := client.DropletActions.Snapshot(id, name)
