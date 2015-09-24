@@ -120,7 +120,7 @@ func DropletAction() *cobra.Command {
 		"snapshot", "snapshot droplet", writer)
 	cmd.AddCommand(cmdDropletActionSnapshot)
 	addIntFlag(cmdDropletActionSnapshot, doit.ArgDropletID, 0, "Droplet ID")
-	addIntFlag(cmdDropletActionSnapshot, doit.ArgSnapshotName, 0, "Snapshot name")
+	addStringFlag(cmdDropletActionSnapshot, doit.ArgSnapshotName, "", "Snapshot name")
 
 	return cmd
 }
