@@ -55,6 +55,12 @@ Example:
 }
 ```
 
+## docs.yaml
+The docs.yaml is where you can change the copy for:
+- flags
+- help text
+- documentation
+
 ## Plugins
 
 `doit` functionality can be enhanced using plugins.

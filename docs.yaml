@@ -1,0 +1,142 @@
+global-flags:
+  access-token: DigtialOcean API V2 Access Token
+  output: output formt [text|json]
+account:
+  get: get your account information
+  response:
+    droplet_limit:
+      name: droplet_limit
+      type: number
+      description: The total number of droplets the user may have
+    email:
+      name: email
+      type: string
+      description: The email the user has registered for Digital Ocean with
+    uuid:
+      name: uuid
+      type: string (alphanumeric)
+      description: The universal identifier for this user
+    email_verified:
+      name: email_verified
+      type: boolean
+      description: If true, the user has verified their account via email. False otherwise.
+action:
+  list: list actions
+  response: TODO(thebyrd) this is currently broken
+domain:
+  create: create a domain
+    flags:
+      domain-name: Domain name
+      ip-address: IP address
+    response:
+      name:
+        name: name
+        type: string
+        description: The name of the domain itself.  This should follow the standard domain format of domain.TLD.  For instance, example.com is a valid domain name.
+      ttl:
+        name: ttl
+        type: number
+        description: This value is the time to live for the records on this domain, in seconds.  This defines the time frame that clients can cache queried information before a refresh should be requested.
+      zone_file:
+        name: zone_file
+        type: string
+        description: This attribute contains the complete contents of the zone file for the selected domain.  Individual domain record resources should be used to get more granular control over records.  However, this attribute can also be used to get information about the SOA record, which is created automatically and is not accessible as an individual record resource.
+  list: list domains
+    response:
+      name:
+        name: name
+        type: string
+        description: The name of the domain itself.  This should follow the standard domain format of domain.TLD.  For instance, example.com is a valid domain name.
+      ttl:
+        name: ttl
+        type: number
+        description: This value is the time to live for the records on this domain, in seconds.  This defines the time frame that clients can cache queried information before a refresh should be requested.
+  get: get domain
+    flags:
+      domain-name: Domain name
+    response:
+      zone_file:
+        name: zone_file
+        type: string
+        description: This attribute contains the complete contents of the zone file for the selected domain.  Individual domain record resources should be used to get more granular control over records.  However, this attribute can also be used to get information about the SOA record, which is created automatically and is not accessible as an individual record resource.
+  delete: delete domain
+    flags:
+      domain-name: Domain name
+  records:
+    list: list records
+      flags:
+        domain-name: Domain name
+      response:
+        id:
+          name: id
+          type: number
+          description: A unique identifier for each domain record.
+        type:
+          name: type
+          type: string
+          description: 'The type of the DNS record (ex: A, CNAME, TXT, ...).'
+        name:
+          name: name
+          type: string
+          description: The name to use for the DNS record.
+        data:
+          name: data
+          type: string
+          description: The value to use for the DNS record.
+        priority:
+          name: priority
+          type: nullable number
+          description: The priority for SRV and MX records.
+        port:
+          name: port
+          type: nullable number
+          description: The port for SRV records.
+        weight:
+          name: weight
+          type: nullable number
+          description: The weight for SRV records.
+    create: create record
+      flags:
+        domain-name: Domain name
+        record-data: Record data
+        record-name: Record name
+        record-port: Record port
+        record-priority: Record priority
+        record-type: Record type
+        record-weight: Record weight
+    delete: delete record
+      flags:
+        domain-name: Domain name
+        record-id: Record ID
+    update: update record
+      flags:
+        domain-name: Domain name
+        record-data: Record data
+        record-name: Record name
+        record-port: Record port
+        record-priority: Record priority
+        record-type: Record type
+        record-weight: Record weight
+droplet-action:
+  get: get droplet action
+    flags:
+      action-id: Action ID
+      droplet-id: Droplet ID
+
+
+  disable-backups: disable backups
+  reboot: reboot droplet
+  power-cycle: power cycle droplet
+  shutdown: shutdown droplet
+  power-off: power off droplet
+  power-on: power on droplet
+  power-reset: power reset droplet
+  enable-ipv6: enable ipv6
+  enable-private-networking: enable private networking
+  upgrade: upgrade droplet
+  restore: restore backup
+  resize: resize droplet
+  rebuild: rebuild droplet
+  rename: rename droplet
+  change-kernel: change kernel
+  snapshot: snapshot droplet
