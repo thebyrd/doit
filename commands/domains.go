@@ -29,7 +29,7 @@ func Domain() *cobra.Command {
 	cmd.AddCommand(cmdDomainGet)
 	addStringFlag(cmdDomainGet, doit.ArgDomainName, "", "Domain name")
 
-	cmdDomainDelete := cmdBuilder(RunDomainDelete, "delete", "delete droplet", writer)
+	cmdDomainDelete := cmdBuilder(RunDomainDelete, "delete", "delete domain", writer)
 	cmd.AddCommand(cmdDomainDelete)
 	addStringFlag(cmdDomainDelete, doit.ArgDomainName, "", "Domain name")
 
