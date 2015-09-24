@@ -56,7 +56,12 @@ func writeText(item interface{}, w io.Writer) error {
 	case []godo.Action:
 		outputActions(item.([]godo.Action), w)
 	case *godo.Domain:
-		outputZone(item.(*godo.Domain), w)
+		d := item.(*godo.Domain)
+		if d.ZoneFile == "" {
+			outputNewDomain(d, w)
+		} else {
+			outputZone(d, w)
+		}
 	case []godo.Domain:
 		outputDomains(item.([]godo.Domain), w)
 	case *godo.DomainRecord:
@@ -208,6 +213,10 @@ func outputSSHKeys(list []godo.Key, out io.Writer) {
 	}
 	fmt.Fprintln(w)
 	w.Flush()
+}
+
+func outputNewDomain(domain *godo.Domain, out io.Writer) {
+	fmt.Fprintln(out, domain.Name, "created.")
 }
 
 func outputZone(domain *godo.Domain, out io.Writer) {
